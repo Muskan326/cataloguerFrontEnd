@@ -1,0 +1,105 @@
+<div class="view">
+    <div class="row">
+    <div class="col-md-2 col-sm-1"></div>
+    <div class="col-md-6 col-sm-10 view-tab box-border animate__animated animate__zoomIn ">
+      <br>
+      <h4 class="text-center" *ngIf="taskDetail.taskId==taskDetail.headTask"><b>HEAD TASK DETAILS</b></h4>
+      <h4 class="text-center"*ngIf="taskDetail.taskId!=taskDetail.headTask"><b>SUB TASK DETAILS</b></h4>
+      <p class="header text-center">Title</p><h6 class="value text-center">{{taskDetail.title|uppercase}}</h6>
+      <p class="header text-center">Description</p><h6 class="value" id="description"></h6>
+      <p class="header text-center">Status</p><h6 class="value text-center">{{taskDetail.status}}</h6>
+      <p class="header text-center">Sub Tasks</p>
+      <h6 class="value text-center">
+        <div *ngIf="taskDetail.subTask.length==0">No Tasks To show</div>
+        <div *ngIf="subtasks.length>0">
+          <ul><li *ngFor="for let each of subtasks" [routerLink]="['/view',each.taskId]">{{each.title|uppercase}}<br> created by {{each.createdBy.userName}} on {{each.createdOn|date}}<hr> </li></ul>
+        </div></h6>
+      <p class="header text-center">Created</p><h6 class="value text-center"> on {{taskDetail.createdOn|date}} by {{taskDetail.createdBy.userName}}</h6>
+      <p class="header text-center">Last Modified</p><h6 class="value text-center"> on {{taskDetail.lastModified.modifyDate|date}} by {{taskDetail.lastModified.userName}}</h6>
+      <br>
+    </div>
+    <br>
+    <div class="col-md-3 col-sm-1 buttons text-center">
+      <h5 class="head box-border">Choose From The Below Actions</h5>
+      <br>
+      <a  *ngIf="isViewer" class="btn box-border  viewB animate__animated animate__slideInDown" on-click="openModal(sub)">Add A Sub Task</a> <br>     
+      <a  *ngIf="isViewer" class="btn box-border  viewB animate__animated animate__slideInDown" on-click="openModal(del)">Delete the Task</a><br>
+      <a  *ngIf="isViewer" class="btn box-border  viewB animate__animated animate__slideInDown" on-click="openModal(edit)">Edit this Task</a><br>
+      <a  *ngIf="isViewer" class="btn box-border  viewB animate__animated animate__slideInDown" [routerLink]="['/view',taskDetail.headTask]">Go To Head task</a>      <br>
+      <a  *ngIf="isViewer" class="btn box-border  viewB animate__animated animate__slideInDown" id="undoButton" on-click="openModal(undomod)">Undo Last</a><br>
+      <a  class="btn box-border  viewB animate__animated animate__slideInDown" on-click="goBack()">Go Back</a><br>
+    </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="row text-center view-button">      
+      <a  *ngIf="isViewer" class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" on-click="openModal(sub)">Add A Sub Task</a>      
+      <a  *ngIf="isViewer" class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" on-click="openModal(del)">Delete the Task</a>
+      <a  *ngIf="isViewer" class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" on-click="openModal(edit)">Edit this Task</a>
+    </div>
+    <div class="row text-center view-button">  
+      <a  *ngIf="isViewer" class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" [routerLink]="['/view',taskDetail.headTask]">Go To Head task</a>      
+      <a  *ngIf="isViewer" class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" on-click="openModal(del)">Undo Last</a>
+      <a  class="btn box-border col-md-2 col-sm-2 viewB animate__animated animate__slideInDown" on-click="goBack()">Go Back</a>
+    </div> 
+      
+   
+    <br><br>
+    </div>
+
+<ng-template #sub>  
+<div class="modal-box animate__animated animate__zoomIn">
+  <br>
+  <h5 class="text-center">Enter The Fields for sub task </h5><hr>
+  <span class="label">&nbsp;&nbsp;Title:&nbsp;&nbsp;</span>
+  <input type="title" name="title" class="form-control" [(ngModel)]="title" placeholder="Enter Sub task title  ..." required autofocus><br>
+  <span class="label">&nbsp;&nbsp;Description:&nbsp;&nbsp;</span>
+  <angular-editor id="description" [config]="editorConfig" placeholder="Enter SubTask Description Text here" name="description" [(ngModel)]="description" required></angular-editor>
+  <br>
+<button class="btn btn-dark mod-button" on-click="createSubTask()">Create Sub Task</button>
+<button class="btn btn-dark mod-button" on-click="decline()">Cancel</button>
+<br>
+</div>
+</ng-template>
+
+<ng-template #del>
+  <div class="text-center">
+    <br>
+    Deleting this task will delete all the sub-tasks associated with it!
+    <br>
+    Do you still want to continue?
+    <br><br>
+    <button class="btn btn-dark mod-button" on-click="deleteTask()">Yes</button>
+    <button class="btn btn-dark mod-button" on-click="decline()">No</button>
+    <br><br>
+  </div>
+</ng-template>
+
+<ng-template #edit>  
+  <div class="modal-box  animate__animated animate__zoomIn">
+    <br>
+    <h5 class="text-center">Edit The Details Of The task</h5><hr>
+    <span class="label">&nbsp;&nbsp;Title:&nbsp;&nbsp;</span>
+    <input type="text" name="taskDetail.title" class="form-control" [(ngModel)]="taskDetail.title" placeholder="Enter task title  ..." required autofocus><br>
+    <span class="label">&nbsp;&nbsp;Description:&nbsp;&nbsp;</span>
+    <angular-editor id="description" [config]="editorConfig" placeholder="Enter Task Description Text here" name="taskDetail.description" [(ngModel)]="taskDetail.description" required></angular-editor><br>
+    <span class="label">&nbsp;&nbsp;Status:&nbsp;&nbsp;</span>
+    <select class="form-control" name="taskDetail.status" [(ngModel)]="taskDetail.status" style="width: 50%;">
+      <option *ngFor="let each of status" ng-selected="taskDetail.status">{{each}}</option>
+    </select>
+    <br>
+    <br>
+  <button class="btn btn-dark mod-button" on-click="editTask()">Save Changes</button>
+  <button class="btn btn-dark mod-button" on-click="decline()">Cancel</button>
+  <br>
+  </div>
+  </ng-template>
+
+  <ng-template #undomod>
+    <div class="modal-body text-center">
+      <p>Do you want to undo last action on head task ?</p>
+      <button class="btn btn-dark mod-button" (click)="undo()" >Yes</button>
+      <button class="btn btn-dark mod-button" on-click="decline()">No</button>
+    </div>
+  </ng-template>

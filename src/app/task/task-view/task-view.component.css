@@ -1,0 +1,97 @@
+.view{
+    overflow: hidden;
+}
+
+.view-tab{
+    margin-top:3%;
+    background-color: whitesmoke;
+    padding: 0;
+    font-weight: bolder;
+    font-style: oblique;
+}
+ul {
+    display: block;
+    list-style-type: square;
+    text-align: left;
+} 
+.buttons{
+    margin-top:5%
+} 
+.label{
+    background-color: lightgray;
+}
+li,#description{
+    margin-left:10%;
+}
+.modal-box{
+    padding:7%;
+}
+
+.header{
+    padding:2%;
+    font-size: larger;
+    color: black;
+    background-color: lightgray;
+    border-top:0.1rem dashed black;
+    border-bottom:0.1rem dashed black
+}
+.mod-button{
+    margin-right:10%
+}
+.value{
+    padding:1%;
+}
+.head{
+    width:100%;
+    padding: 1%; 
+    margin-left:12.5%;
+    margin-bottom:2%;
+    background-color: whitesmoke;
+    box-shadow: unset;
+}
+.viewB{
+    width:100%;
+    padding: 1%;
+    margin-left:12.5%;
+    margin-bottom:2%;
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-style: oblique;
+    font-size: larger;
+    border: 0.1rem solid whitesmoke;
+    box-shadow: unset;
+}
+
+@media screen and (max-width:575px){
+    div.view-tab{
+        margin-left:15%;
+        margin-right:15%;
+    }
+
+    div.view-button{
+        margin: 5% 20% 0% 20%;
+    }
+
+    a.viewB{
+        margin-bottom: 5%;
+    }
+}
+
+@media screen and (max-width:290px){
+    div.view-tab{
+        margin-left:5%;
+        margin-right:5%;
+    }
+}
+
+@media screen and (max-width:768px){
+    div.buttons{
+        display: none;
+    }
+}
+@media screen and (min-width:769px){
+    div.view-button{
+        display: none;
+    }
+}

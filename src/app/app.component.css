@@ -1,0 +1,45 @@
+.Screen{
+    background-image: url('../assets/images/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.6;
+    position: fixed; 
+    top: 0; 
+    left: 0;  
+    min-width: 100%;
+    min-height: 100%;
+}
+.list{
+    padding:5%
+}
+.mod-button{
+    margin-right:10%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+.btn{
+    padding: 0%;
+}
+
+    .btn-group{
+        position: absolute;
+        right:2%;
+    }
+
+    .dropdown-menu{
+        position: absolute;
+        right:40%;
+    }
+
+    .forgot{
+        position: absolute;
+        right:5%
+    }
+.navbar{
+    background-color: black;
+}
+
+.logo{
+    width: 100%;
+    height: 100%;
+}

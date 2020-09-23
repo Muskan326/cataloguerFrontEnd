@@ -1,0 +1,58 @@
+<div class="loginPage"><div class="row">
+  <div class="col-md-6 col-sm-6 text-center">
+      <img class="box-border p-0 login animate__animated animate__backInLeft" src="../assets/images/login.jpg">
+    </div>
+  <div class="col-md-6 col-sm-6 text-center">
+    <div class="col-md-8 loginForm">
+    <form class="box-border  animate__animated animate__backInRight">    
+      <label for="inputEmail" class="sr-only">Email address</label>
+  
+      <input type="email" name="email" id="inputEmail" class="form-control" [(ngModel)]="email" placeholder="Enter Email address ..." required autofocus>
+  
+      <br>
+  
+      <label for="inputPassword" class="sr-only">Password</label>
+  
+      <input type="password" name="password" id="inputPassword" class="form-control" [(ngModel)]="password" placeholder="EnterPassword ..." required>
+  
+      <br>
+  
+      <button class="btn btn-lg btn-dark btn-block" type="button" on-click="login()">Sign in</button>
+      </form>
+      <br>
+      <div class="text-center animate__animated animate__backInRight"><h4>Not Registered With us!</h4><br><a class="btn  box-border" style="padding:0.5rem" [routerLink]="['/signup']">Click Here to Signup</a></div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<button id="openModalButton" [hidden]="true" on-click="openModal(setPass)">Open Modal</button>
+<ng-template #setPass>
+  <div class="modal-box">
+    <h5>Please Reset Your Password Before Proceeding</h5>
+    <br>
+    <form>
+    <span>Old Password</span>
+    <input class="form-control" type="password" [(ngModel)]="oldPassword" name="oldPassword">
+    <br>
+    <span>New Password</span>
+    <input class="form-control" type="password" [(ngModel)]="newPassword" name="newPassword">
+    <br>
+    <div class="text-center"><a class="btn btn-dark" on-click="resetPassword()">Reset</a></div>
+  </form>
+  </div>
+</ng-template>
+
+<ng-template #verify>
+  <div class="modal-box">
+    <h5>Please Vefiry Your Email Address before proceeding to register</h5>
+    <br>
+    <form>
+    <span>Email Address</span>
+    <input class="form-control" type="email" [(ngModel)]="verifyEmail" name="verifyEmail">
+    <br>
+    <div class="text-center"><a class="btn btn-dark" on-click="mailVerify()">Verify</a></div>
+  </form>
+  </div>
+</ng-template>

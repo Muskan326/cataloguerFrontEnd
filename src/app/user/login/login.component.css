@@ -1,0 +1,54 @@
+.text-center{
+    margin-top:4%;
+}
+.loginPage{
+    overflow: hidden;
+}
+
+
+.loginForm{
+    margin-left:3%
+}
+.line{
+    border-bottom: black;
+    margin-top:4%
+}
+.Glogin{
+padding: 0;
+margin-top:2%
+}
+
+.loginForm{
+    width:100%;
+  }
+
+  .modal-box{
+    padding:7%;
+}
+
+@media screen and (max-width:700px){
+    img.login{
+        width:80%;
+        height:100%
+    }
+
+}
+
+@media screen and (max-width:575px){
+    img.login{
+        width:70%;
+        height:90%
+    }
+
+}
+@media screen and (max-width:400px){
+    img.Glogin{
+        width:80%;
+    }
+}
+@media screen and (max-width:300px){
+    img.login{
+        width:80%;
+        height:100%
+    }
+}

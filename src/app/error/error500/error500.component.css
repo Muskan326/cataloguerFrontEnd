@@ -1,0 +1,18 @@
+.image{
+    width: 100%;
+}
+
+.text-center{
+    margin-top:1.5%
+}
+
+.box{
+    overflow: hidden;
+}
+
+@media screen and(max-width:575px){
+    div.text-center{
+        margin-left:2%;
+        margin-right:2%  
+      }
+}

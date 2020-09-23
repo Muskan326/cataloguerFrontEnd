@@ -1,0 +1,60 @@
+<div class="loginPage">
+    <div class="row">
+    <div class="col-md-6 col-sm-6 text-center Img">
+        <img class="box-border p-0 signImg animate__animated animate__backInLeft" src="../assets/images/signup.jpg">
+    </div>
+    <div class="col-md-6 col-sm-6 p-0 m-0">
+      <div class="signupForm">
+      <!-- Signup Form -->
+      <form class="box-border signup animate__animated animate__backInRight" #createForm="ngForm">
+
+          <h5>Email address:</h5>       
+          <label for="inputEmail" class="sr-only">Email address</label>      
+          <input type="email" name="email" id="inputEmail" class="form-control" [(ngModel)]="email" (focusout)="mailVerify()"  placeholder="Enter Email address" required>       
+      
+          <h5>FirstName:</h5>   
+          <label for="inputFirstName" class="sr-only">FirstName</label>      
+          <input type="text" name="firstName" id="inputFirstName" class="form-control" [(ngModel)]="firstName" placeholder="Enter FirstName" required autofocus>
+                
+          <h5>LastName:       </h5>
+          <label for="inputLastName" class="sr-only">LastName</label>      
+          <input type="text" name="lastName" id="inputLastName" class="form-control" [(ngModel)]="lastName" placeholder="Enter LastName" required>          
+        
+
+          <h5>Country:</h5>
+          <label for="country" class="sr-only">Country</label>
+          <select name="country" class="form-control" [(ngModel)]="country" (change)="changeCode()" required>
+            <option *ngFor="let each of Allcountry" width="50%"  [value]="each.country" ng-selected="country">{{each.country}}</option>
+          </select>
+      
+
+          <h5>Contact Details:       </h5>
+          <label for="inputMobile" class="sr-only">Contact</label>
+          <label for="code" class="sr-only">Country Code</label>
+          <h6>Country Code:</h6><select name="code" [(ngModel)]="code" class="form-control"  (change)="changeCountry()" placeholder="Enter Your Country Code" required>
+            <option *ngFor="let each of Allcode" width="100%"  [value]="each.phone">{{each.phone}}</option>
+          </select>
+          <h6>Number:</h6><input type="number" name="mobile" id="inputMobile" class="form-control" [(ngModel)]="mobile" placeholder="Enter Mobile Number" required>
+          
+      
+          <h5>Gender:</h5>
+          <label for="gender" class="sr-only">Gender</label>
+          <select name="gender" class="form-control" [(ngModel)]="gender" required>
+            <option *ngFor="let each of Allgender" [value]="each" >{{each}}</option>
+          </select>
+
+      
+         <h5>Set A Password:</h5>   
+          <label for="inputPassword" class="sr-only">Password</label>      
+          <input type="password" name="password" id="inputPassword" class="form-control" [(ngModel)]="password" placeholder="Enter Password" required>
+
+          <br>
+          <button class="btn btn-lg btn-dark btn-block" type="button" on-click="register()" >Sign Up</button>
+          <br>          
+          <div class="text-center">Already Registered !  <button class="btn btn-dark" [routerLink]="['/login']">Click Here to Login</button></div>
+
+      </form>    
+      </div>
+    </div>
+  </div>
+</div>

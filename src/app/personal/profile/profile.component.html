@@ -1,0 +1,37 @@
+<div class="profilePage">
+<div class="row">
+    <div class="col-md-5 col-sm-5 division">
+      <form class="profile box-border animate__animated animate__backInDown">
+        <div class="text-center">
+            <img *ngIf="profileInfo.gender=='Male'" src="assets/images/male.png">
+            <img *ngIf="profileInfo.gender=='Female'" src="assets/images/female.png">
+            <img *ngIf="profileInfo.gender=='Other'" src="assets/images/other.png">
+          </div>
+            Name:&nbsp;&nbsp;&nbsp;{{profileInfo.firstName}}&nbsp;{{profileInfo.lastName}}<br><hr>
+            Gender:&nbsp;&nbsp;&nbsp;{{profileInfo.gender}}<br><hr>
+            Email:&nbsp;&nbsp;&nbsp;<span class="email">{{profileInfo.email}}</span><hr>
+            Joined:&nbsp;&nbsp;&nbsp;{{profileInfo.joined|date}}<br><hr>
+            Country:&nbsp;&nbsp;&nbsp;{{profileInfo.country}}<br><hr>
+          <br>
+          <button *ngIf="friend" class="btn btn-dark" on-click="unfriend(profileInfo.userId)">Unfriend</button>
+          <button *ngIf="!friend && !request && visible" id="send" class="btn btn-dark" on-click="sendRequest(profileInfo.userId)">Send Request</button>
+          <button *ngIf="request" class="btn btn-dark" on-click="removeRequest(profileInfo.userId)">Remove Request</button>
+          <button *ngIf="accept" class="btn btn-dark" on-click="acceptRequest(profileInfo.userId,profileInfo.userName)">Accept Request</button>
+    </form>
+    </div>
+    <div class="col-md-3 col-sm-3 division">
+      <div  class="box-border animate__animated animate__backInDown">
+        <b>{{profileInfo.firstName}}'s Friends</b> &nbsp;&nbsp; ({{profileInfo.friends.length}})<hr>
+          <p *ngIf="profileInfo.friends.length==0">No Friends to Show.</p>
+          <a *ngFor="let each of profileInfo.friends" [routerLink]="['/profile',each.userId]">{{each.userName}}<hr></a>   
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 division">
+      <div  class="box-border animate__animated animate__backInDown">
+        <b>{{profileInfo.firstName}}'s created Tasks</b> &nbsp;&nbsp; ({{allTasks.length}})  <hr>
+          <p *ngIf="allTasks.length==0">No Tasks created by {{profileInfo.firstName}}</p>
+          <a *ngFor="let each of allTasks" [routerLink]="['/view',each.taskId]">{{each.title}}<hr></a>   
+        </div>
+    </div>
+  </div>
+</div>

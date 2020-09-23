@@ -1,0 +1,25 @@
+<div class="all">
+    <div class="row">
+    <div class="col-md-3 col-sm-1"></div>
+    <div class="col-md-6 col-sm-10 all-tab box-border animate__animated animate__zoomIn ">
+      <br>
+        <h5 class="text-center">List Of All Tasks</h5><hr>
+        <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" placeholder="Enter Search text"  autofocus>
+        <hr>
+        <ul *ngIf="allHeadTasks.length>0">
+            <li *ngFor="let each of allHeadTasks|filter:searchText" [routerLink]="['/view',each.taskId]">{{each.title|uppercase}}<br>created on {{each.createdOn|date}} by {{each.createdBy.userName}}<hr></li>
+        </ul>
+
+      <br>
+    </div>
+    <br>
+    <div class="col-md-3 col-sm-1"></div>
+
+    </div>
+    <br>
+    <br>
+    <div class="row text-center view-button">
+      <a  class="btn box-border col-md-2 col-sm-2 viewB" on-click="goBack()">Go Back</a>
+    </div>
+    <br><br>
+    </div>

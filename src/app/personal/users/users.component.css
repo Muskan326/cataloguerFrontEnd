@@ -1,0 +1,38 @@
+.users{
+    overflow: hidden;
+}
+
+.users-tab{
+    margin-top:5%;
+    min-height:100%;
+
+}
+
+.email{
+    margin-left:6%;
+}
+.material-icons{
+    margin-right: 3%;
+}
+.box{
+    border-bottom: 0.1rem solid lightgrey;
+    padding:2%
+}
+.viewB{
+    padding: 0.5%;
+    margin-left:7%;
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-style: oblique;
+    font-size: larger;
+    border: 0.1rem solid whitesmoke;
+    box-shadow: unset;
+}
+
+@media screen and (max-width:575px){
+    div.row{
+        margin-left:2%;
+        margin-right: 2%;
+    }
+}

@@ -1,0 +1,33 @@
+.profile{
+font-family: 'Berlin Sans FB Demi';
+font-size:1.25rem
+}
+
+
+.division{
+    margin-left: 2%;
+    margin-top:3%;
+    }
+
+.box-border{
+    min-height:50%;
+}
+.profilePage{
+    overflow: hidden;
+}
+span.email{
+    font-size: large;
+}
+
+@media screen and (max-width:575px){
+    .division{
+        margin-left:3%;
+        margin-right:3%
+    }
+}
+
+@media screen and (max-width:780px){
+    span.email{
+        font-size: medium;
+    }
+}

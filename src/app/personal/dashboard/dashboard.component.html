@@ -1,0 +1,104 @@
+<div class="dashboard">
+  <carousel class="animate__animated animate__backInDown">
+    <slide class="slider">
+      <img src="assets/images/01.jpg" alt="first slide" style="display: block; width: 100%;">
+    </slide>
+    <slide class="slider">
+      <img src="assets/images/02.jpg" alt="second slide" style="display: block; width: 100%;">
+    </slide>
+    <slide class="slider">
+      <img src="assets/images/03.jpg" alt="third slide" style="display: block; width: 100%;">
+    </slide>
+    <slide class="slider">
+        <img src="assets/images/04.jpg" alt="third slide" style="display: block; width: 100%;">
+      </slide> 
+  </carousel>
+<br>
+  <div class="text-center options row">
+    <button class="tabs col-md-2 col-sm-2 box-border animate__animated animate__slideInDown"  on-click="showTaskForm()">Create A new task</button>
+    <button class="tabs col-md-3 col-sm-3 box-border animate__animated animate__slideInDown"  on-click="showAllTask()">Your Related Tasks</button>
+    <button class="tabs col-md-2 col-sm-2 box-border animate__animated animate__slideInDown"  on-click="showFriends()">Your Friends ({{details.friends.length}})</button>
+    <button class="tabs col-md-3 col-sm-3 box-border animate__animated animate__slideInDown"  on-click="showRequests()">Your Friend Requests ({{details.requests.length}})</button>
+    <button class="tabs col-md-2 col-sm-2 box-border animate__animated animate__slideInDown"  on-click="showNotification()">Notifications ({{allNotifications.length}})</button>
+  </div>
+
+
+<div  *ngIf="showForm" id="createTask" class="row part">
+  <div class="col-md-3 col-sm-3"></div>
+  <form class="box-border col-md-6 col-sm-6"> 
+    <h2 class="text-center">Create A New Task</h2>
+   <br>
+    <label for="inputtitle" class="sr-only">Task Title</label>
+    <span class="label">&nbsp;&nbsp;Title:&nbsp;&nbsp;</span>
+    <input type="title" name="title" class="form-control" [(ngModel)]="title" placeholder="Enter task title  ..." required autofocus><br>
+    <span class="label">&nbsp;&nbsp;Description:&nbsp;&nbsp;</span>
+    <label for="inputdescription" class="sr-only">Task Description</label>
+
+    <angular-editor id="description" [config]="editorConfig" placeholder="Description Text here" name="description" [(ngModel)]="description" required></angular-editor>
+    <br>
+    <div class="subTasks"></div>
+    <button class="btn btn-lg btn-dark btn-block" type="button" on-click="createTask()" >Create Task</button>
+    </form>
+    <div class="col-md-3 col-sm-3"></div>
+</div>
+
+<div  *ngIf="showTasks" id="allTask" class="row part">
+  <div class="col-md-3 col-sm-3"></div>
+  <div class="box-border col-md-6 col-sm-6">
+    <h2 class="text-center">Your All Related Tasks</h2>
+    <hr>
+    <ul *ngIf="allrelatedTasks!=undefined && allrelatedTasks.length>0"><li *ngFor="for let each of allrelatedTasks" [routerLink]="['/view',each.taskId]">{{each.title|uppercase}}<br> created by {{each.createdBy.userName}} on {{each.createdOn|date}}<hr> </li></ul>
+    <h5 *ngIf="allrelatedTasks==undefined || allrelatedTasks.length==0">You dont have any related tasks.</h5>
+  </div>
+  <div class="col-md-3 col-sm-3"></div>
+</div> 
+
+<div *ngIf="showfriends" id="friends" class="row part">
+  <div class="col-md-3 col-sm-3"></div>
+  <div class="text-center friendTable col-md-6 col-sm-6 box-border">
+    <h2 class="text-center">Your Friends</h2><hr>
+    <div *ngIf="details.friends.length>0">
+      <div *ngFor="let each of details.friends" class="row box">
+          <span class="material-icons">radio_button_checked</span>{{each.userName}}<button class="btn btn-dark button" [routerLink]="['/profile',each.userId]">View Profile</button>
+      </div>
+  </div>
+  <h5 *ngIf="details.friends.length==0">Sorry You Dont Have Any Friends Right Now</h5>
+  </div>
+<div class="col-md-3 col-sm-3"></div>
+</div>
+
+<div *ngIf="showrequests" id="requests" class="row part">
+  <div class="col-md-3 col-sm-3"></div>
+  <div class="text-center friendTable col-md-6 col-sm-6 box-border">
+    <h2 class="text-center">Pending Friend Requests</h2><hr>
+    <div *ngIf="details.requests.length>0">
+      <div *ngFor="let each of details.requests" class="row box">
+          <div class="icon col-md-1 col-sm-1"><span class="material-icons">radio_button_checked</span></div>
+          <div class="detail col-md-5 col-sm-5">{{each.userName}}</div>
+          <div class="button col-md-3 col-sm-3"><a class="btn btn-dark" [routerLink]="['/profile',each.userId]">View Profile</a></div>
+          <div class="button col-md-3 col-sm-3"><a class="btn btn-dark" on-click="acceptRequest(each.userId,each.userName)">Accept</a></div>
+      </div>
+  </div>
+  <h5 *ngIf="details.requests.length==0">You have no pending friend requests</h5>
+  </div>
+<div class="col-md-3 col-sm-3"></div>
+</div>
+
+
+<div *ngIf="showNotify" id="showNotify" class="row part">
+  <div class="col-md-3 col-sm-3"></div>
+  <div class="text-center friendTable col-md-6 col-sm-6 box-border">
+    <h2 class="text-center">Notifications</h2><hr>
+    <div *ngIf="allNotifications.length>0">
+      <div *ngFor="let each of allNotifications" class="row box">
+         <p [routerLink]="each.path" on-click="deleteNotification(each.notifyId)">{{each.actionString}}</p>
+      </div>
+      <br>
+      <a  class="btn btn-dark"  *ngIf="allNotifications.length>0" on-click="ReadAll()"> Mark All As Read</a>
+  </div>
+  <h5 *ngIf="allNotifications.length==0">You have no New Notifications</h5>
+  </div>
+<div class="col-md-3 col-sm-3"></div>
+</div>
+
+</div>
